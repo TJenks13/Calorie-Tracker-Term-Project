@@ -16,13 +16,13 @@ class Menu:public Person
         Menu();
         virtual ~Menu();
 
-        void displayMenu();
         void signInMenu();
         //Will create class Person to sign in with credentials and read from a file.
         void signIn();
         //Creates person class to create an account to write credentials to class, which will be
         //stored in a file using a dtor.
         void createAccount();
+        void modifyInformation();
 };
 
 #endif // MENU_H
