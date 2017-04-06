@@ -1,44 +1,21 @@
-#include "Person.h"
-#include <string>
-#include <fstream>
+#include "Guest.h"
 #include <iostream>
 
 using namespace std;
 
-Person::Person()
+Guest::Guest()
 {
-    calorieGoal = 0;
-    userName = " ";
-    password = " ";
-    currentCalories = 0;
+    //ctor
 }
 
-Person::Person(string name, string pass, double calGoal)
-{
-    userName = name;
-    password = pass;
-    calorieGoal = calGoal;
-    currentCalories = 0;
-}
-
-Person::~Person()
+Guest::~Guest()
 {
     //dtor
 }
 
-void Person::setCalorieGoal(double goal)
+void Guest::displayMenu(Guest guest)
 {
-    calorieGoal = goal;
-}
-
-void Person::setCurrentCalories(double curCals)
-{
-    currentCalories = curCals;
-}
-
-void Person::displayMenu(Person)
-{
-    char choice = ' ';
+ char choice = ' ';
 
     do
     {
@@ -78,11 +55,3 @@ void Person::displayMenu(Person)
     }
     while (choice != '6');
 }
-
-void Person::viewUserInfo()
-{
-    cout << "Username: " << userName << endl;
-    cout << "Daily Calorie Goal: " << calorieGoal << endl;
-    cout << "Caloric Intake: " << currentCalories << endl;
-}
-

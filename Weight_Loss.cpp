@@ -1,44 +1,22 @@
-#include "Person.h"
-#include <string>
-#include <fstream>
+#include "Weight_Loss.h"
 #include <iostream>
 
 using namespace std;
 
-Person::Person()
+void Weight_Loss::setVariables(double h, double w)
 {
-    calorieGoal = 0;
-    userName = " ";
-    password = " ";
-    currentCalories = 0;
+    height = h;
+    weight = w;
 }
 
-Person::Person(string name, string pass, double calGoal)
-{
-    userName = name;
-    password = pass;
-    calorieGoal = calGoal;
-    currentCalories = 0;
-}
-
-Person::~Person()
+Weight_Loss::~Weight_Loss()
 {
     //dtor
 }
 
-void Person::setCalorieGoal(double goal)
+void Weight_Loss::displayMenu(Weight_Loss user)
 {
-    calorieGoal = goal;
-}
-
-void Person::setCurrentCalories(double curCals)
-{
-    currentCalories = curCals;
-}
-
-void Person::displayMenu(Person)
-{
-    char choice = ' ';
+ char choice = ' ';
 
     do
     {
@@ -78,11 +56,3 @@ void Person::displayMenu(Person)
     }
     while (choice != '6');
 }
-
-void Person::viewUserInfo()
-{
-    cout << "Username: " << userName << endl;
-    cout << "Daily Calorie Goal: " << calorieGoal << endl;
-    cout << "Caloric Intake: " << currentCalories << endl;
-}
-

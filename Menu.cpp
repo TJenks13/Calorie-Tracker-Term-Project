@@ -3,6 +3,8 @@
 #include <fstream>
 #include <string>
 #include "Person.h"
+#include "Weight_Loss.h"
+#include "Guest.h"
 
 
 using namespace std;
@@ -21,7 +23,7 @@ Menu::~Menu()
 void Menu::signInMenu()
 {
     //Prompt the user to either sign-in or create an account.
-    cout << "Would you like to sign-in or create an account?(Y/N) ";
+    cout << "Would you like to sign-in or create an account? ";
     cin >> userChoice;
 
     //Input verification.
@@ -36,6 +38,7 @@ void Menu::signInMenu()
         cout << "Would you like to sign in, or create an account?\n";
         cout << "1. Sign In\n";
         cout << "2. Create an Account\n";
+        cout << "Make your selection: ";
         cin >> signInChoice;
 
         while (signInChoice != 1 && signInChoice != 2)
@@ -54,67 +57,101 @@ void Menu::signInMenu()
 
     else if(userChoice == 'N' || userChoice == 'n')
     {
-        displayMenu();
+        Guest user;
+        displayMenu(user);
     }
 }
 
 void Menu::signIn()
 {
-    Person user;
-    string userName = " ";
-    string passWord = " ";
-    cout << "Enter your username: ";
-    cin >> userName;
-    setUserName(userName);
-    cout << "Enter your password: ";
-    cin >> passWord;
-    setPassword(passWord);
+    char choice = ' ';
+    cout << "Were you tracking your weight?(Y/N) ";
+    cin >> choice;
+    while (choice != 'y' && choice != 'Y' && choice != 'n' && choice != 'N')
+    {
+        cout << "Please enter a valid choice: ";
+        cin >> choice;
+    }
 
-    cout << "Welcome back!\n\n";
-    displayMenu();
+    if(choice == 'Y' || choice == 'y')
+    {
+        Weight_Loss user;
+        string userName = " ";
+        string passWord = " ";
+        cout << "Enter your username: ";
+        cin >> userName;
+        setUserName(userName);
+        cout << "Enter your password: ";
+        cin >> passWord;
+        setPassword(passWord);
+
+        cout << "Welcome back!\n\n";
+        displayMenu(user);
+    }
+
+    else if(choice == 'N' || choice == 'n')
+    {
+        Person user;
+        string userName = " ";
+        string passWord = " ";
+        cout << "Enter your username: ";
+        cin >> userName;
+        setUserName(userName);
+        cout << "Enter your password: ";
+        cin >> passWord;
+        setPassword(passWord);
+
+        cout << "Welcome back!\n\n";
+        displayMenu(user);
+    }
 }
 
 void Menu::createAccount()
 {
-    cout << "Welcome to the program!\n";
-    displayMenu();
-}
-
-void Menu::displayMenu()
-{
     char choice = ' ';
+    string userName = " ";
+    string passWord = " ";
+    cout << "Create an Account\n";
+    cout << "-----------------\n";
+    cout << "Please type in a username and password.\n";
+    cout << "Username: ";
+    cin >> userName;
+    cout << "Password: ";
+    cin >> passWord;
+    cout << "Would you like to track your weight? (Y/N) ";
+    cin >> choice;
+    cin.ignore();
 
-    do
+    while (choice != 'y' && choice != 'Y' && choice != 'n' && choice != 'N')
     {
-        cout << "What would you like to do?\n\n";
-
-        cout << "1. Add/Modify User Information\n";
-        cout << "2. View Current User Information\n";
-        cout << "3. Modify Calorie Goal\n";
-        cout << "4. Update my caloric intake for the day\n";
-        cout << "5. Quit\n";
-
-        cout << "Please enter your choice: ";
+        cout << "Please enter a valid choice: ";
         cin >> choice;
-        cin.ignore();
-
-        while(choice < '1' || choice > '5')
-        {
-            cout << "Please enter a valid choice: ";
-            cin >> choice;
-        }
-
-        switch(choice)
-        {
-            case '1':
-                break;
-            case '2':
-                break;
-            case '3':
-                break;
-            case '4':
-                break;
-        }
     }
-    while (choice != '5');
+
+    if(choice == 'Y' || choice == 'y')
+    {
+        double calGoal = 0;
+        double height = 0;
+        double weight = 0;
+        cout << "Please enter your height (in inches): ";
+        cin >> height;
+        cout << "Please enter your weight (in pounds): ";
+        cin >> weight;
+        cout << "Please enter your daily calorie goal: ";
+        cin >> calGoal;
+        Weight_Loss user(height, weight, userName, passWord, calGoal);
+        cout << "Account Created!\n";
+        displayMenu(user);
+    }
+
+    else if(choice == 'N' || choice == 'n')
+    {
+        double calGoal = 0;
+        cout << "Please enter your daily calorie goal: ";
+        cin >> calGoal;
+        Person user(userName, passWord, calGoal);
+        cout << "Account Created!\n";
+        displayMenu(user);
+    }
+
 }
