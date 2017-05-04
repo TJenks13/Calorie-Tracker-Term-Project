@@ -2,6 +2,8 @@
 #define MENU_H
 #include <iostream>
 #include "Person.h"
+#include "Weight_Loss.h"
+#include "Guest.h"
 
 using namespace std;
 //Menu class to display a welcome message to the user and present the

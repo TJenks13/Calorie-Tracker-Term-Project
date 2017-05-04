@@ -1,32 +1,36 @@
 #ifndef PERSON_H
 #define PERSON_H
 #include <string>
+#include "FoodReferenceGuide.h"
 
 using namespace std;
 class Person
 {
     private:
-        double calorieGoal;
-        double currentCalories;
         string userName;
         string password;
+        double calorieGoal;
+        double currentCalories;
     public:
         Person();
         Person(string, string, double);
         virtual ~Person();
 
+        void personDestroy();
         string foodRecommend(string);
-        void addFood(string);
-        double getCalorieGoal()
-            {return calorieGoal;}
+        string getUserName() {return userName;}
+        string getPassword() {return password;}
+        double getCalGoal() {return calorieGoal;}
+        double getCurCal() {return currentCalories;}
         void setUserName(string name){userName = name;}
         void setPassword(string text){password = text;}
         void setCalorieGoal(double);
         void setCurrentCalories(double);
-        virtual void displayMenu(Person);
-        virtual void modifyInfo();
-        virtual void viewUserInfo();
-
+        void updateCaloricIntake();
+        void viewUserInfo();
+        bool personLoadUserData(string, string);
+        virtual void saveUserData();
+        void displayMenu();
 };
 
 #endif // PERSON_H

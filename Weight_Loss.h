@@ -1,6 +1,7 @@
 #ifndef WEIGHT_LOSS_H
 #define WEIGHT_LOSS_H
 #include "Person.h"
+#include "FoodReferenceGuide.h"
 
 class Weight_Loss: public Person
 {
@@ -20,14 +21,25 @@ class Weight_Loss: public Person
             setVariables(height, weight);
         }
         virtual ~Weight_Loss();
+
+        void destroy();
         void setVariables(double, double);
         double getHeight()
             {return height;}
         double getWeight()
             {return weight;}
-        virtual void displayMenu(Weight_Loss);
-        virtual void modifyInfo();
-        virtual void viewUserInfo();
+        void setWeight(double);
+        void setHeight(double);
+        void setWeight();
+        void setHeight();
+        void setCaloricIntake() {updateCaloricIntake();}
+        void addFoodDb();
+        void viewFoodDb();
+        void loadFoodDb();
+        void viewWL_UserInfo();
+        virtual bool loadUserData(string, string);
+        virtual void saveUserData();
+        void displayWLMenu();
 };
 
 #endif // WEIGHT_LOSS_H

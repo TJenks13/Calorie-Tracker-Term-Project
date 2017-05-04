@@ -1,0 +1,3 @@
+turkey     250
+chicken    90
+green beans     60

@@ -1,6 +1,7 @@
 #ifndef GUEST_H
 #define GUEST_H
 #include "Person.h"
+#include "FoodReferenceGuide.h"
 
 class Guest: public Person
 {
@@ -9,9 +10,7 @@ class Guest: public Person
     public:
         Guest();
         virtual ~Guest();
-        virtual void displayMenu(Guest);
-        virtual void modifyInfo();
-        virtual void viewUserInfo();
+        void displayGuestMenu();
 };
 
 #endif // GUEST_H

@@ -23,7 +23,7 @@ Menu::~Menu()
 void Menu::signInMenu()
 {
     //Prompt the user to either sign-in or create an account.
-    cout << "Would you like to sign-in or create an account? ";
+    cout << "Would you like to sign-in or create an account? (Y/N) ";
     cin >> userChoice;
 
     //Input verification.
@@ -58,7 +58,7 @@ void Menu::signInMenu()
     else if(userChoice == 'N' || userChoice == 'n')
     {
         Guest user;
-        displayMenu(user);
+        user.displayGuestMenu();
     }
 }
 
@@ -85,8 +85,38 @@ void Menu::signIn()
         cin >> passWord;
         setPassword(passWord);
 
-        cout << "Welcome back!\n\n";
-        displayMenu(user);
+        bool result = user.loadUserData(userName, passWord);
+
+        if(result == 1)
+        {
+            cout << "Welcome back!\n\n";
+            user.displayWLMenu();
+        }
+
+        else if(result == 0)
+        {
+            char choice;
+            cout << "No account was found. Would you like to create an account? (Y/N) ";
+            cin >> choice;
+            cin.ignore();
+
+            while (choice != 'y' && choice != 'Y' && choice != 'n' && choice != 'N')
+            {
+                cout << "Please enter a valid choice: ";
+                cin >> choice;
+            }
+
+            if(choice == 'Y' || choice == 'y')
+            {
+                createAccount();
+            }
+
+            else if(choice == 'N' || choice == 'n')
+            {
+                cout << "Goodbye.\n";
+                return;
+            }
+        }
     }
 
     else if(choice == 'N' || choice == 'n')
@@ -101,8 +131,38 @@ void Menu::signIn()
         cin >> passWord;
         setPassword(passWord);
 
-        cout << "Welcome back!\n\n";
-        displayMenu(user);
+        bool result = user.personLoadUserData(userName, passWord);
+
+        if(result == 1)
+        {
+            cout << "Welcome back!\n\n";
+            user.displayMenu();
+        }
+
+        else if(result == 0)
+        {
+            char choice;
+            cout << "No account was found. Would you like to create an account? (Y/N) ";
+            cin >> choice;
+            cin.ignore();
+
+            while (choice != 'y' && choice != 'Y' && choice != 'n' && choice != 'N')
+            {
+                cout << "Please enter a valid choice: ";
+                cin >> choice;
+            }
+
+            if(choice == 'Y' || choice == 'y')
+            {
+                createAccount();
+            }
+
+            else if(choice == 'N' || choice == 'n')
+            {
+                cout << "Goodbye.\n";
+                return;
+            }
+        }
     }
 }
 
@@ -141,7 +201,7 @@ void Menu::createAccount()
         cin >> calGoal;
         Weight_Loss user(height, weight, userName, passWord, calGoal);
         cout << "Account Created!\n";
-        displayMenu(user);
+        user.displayWLMenu();
     }
 
     else if(choice == 'N' || choice == 'n')
@@ -151,7 +211,7 @@ void Menu::createAccount()
         cin >> calGoal;
         Person user(userName, passWord, calGoal);
         cout << "Account Created!\n";
-        displayMenu(user);
+        user.displayMenu();
     }
 
 }
